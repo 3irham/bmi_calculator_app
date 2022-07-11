@@ -1,4 +1,5 @@
-import 'package:bmi_calculator_app/bmi_result_screen.dart';
+import 'package:bmi_calculator_app/constants/constant.dart';
+import 'package:bmi_calculator_app/views/bmi_result_screen.dart';
 import 'package:flutter/material.dart';
 
 class BmiDataScreen extends StatefulWidget {
@@ -25,22 +26,20 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.grey,
+                      color: Color(0xff272A4E),
                       borderRadius: BorderRadius.circular(15),
                     ),
+                    margin: const EdgeInsets.all(15),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Icon(
                           Icons.male,
                           size: 80,
                         ),
                         Text(
                           'Male',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xff8d8e98),
-                          ),
+                          style: genderTextStyle,
                         ),
                       ],
                     ),
@@ -49,22 +48,20 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.grey,
+                      color: Color(0xff272A4E),
                       borderRadius: BorderRadius.circular(15),
                     ),
+                    margin: const EdgeInsets.all(15),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Icon(
                           Icons.female,
                           size: 80,
                         ),
                         Text(
                           'Female',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xff8d8e98),
-                          ),
+                          style: genderTextStyle,
                         ),
                       ],
                     ),
