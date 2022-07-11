@@ -41,6 +41,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
             },
             child: Container(
               height: 60,
+              color: Colors.blue,
               child: const Center(child: Text('BMI Data')),
             ),
           ),

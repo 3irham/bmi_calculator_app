@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class BmiResultScreen extends StatelessWidget {
   const BmiResultScreen({super.key});
@@ -9,7 +7,7 @@ class BmiResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI Calculator'),
+        title: const Text('BMI Result'),
         centerTitle: true,
       ),
     );
