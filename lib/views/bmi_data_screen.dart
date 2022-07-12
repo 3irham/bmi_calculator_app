@@ -20,56 +20,20 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
       body: Column(
         children: [
           Expanded(
-              child: Container(
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xff272A4E),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    margin: const EdgeInsets.all(15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.male,
-                          size: 80,
-                        ),
-                        Text(
-                          'Male',
-                          style: genderTextStyle,
-                        ),
-                      ],
-                    ),
-                  ),
+                  child: BMICard(
+                      child: GenderIconText(title: 'Male', icon: Icons.male)),
                 ),
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xff272A4E),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    margin: const EdgeInsets.all(15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.female,
-                          size: 80,
-                        ),
-                        Text(
-                          'Female',
-                          style: genderTextStyle,
-                        ),
-                      ],
-                    ),
-                  ),
+                  child: BMICard(
+                      child:
+                          GenderIconText(title: 'Female', icon: Icons.female)),
                 ),
               ],
             ),
-          )),
+          ),
           Expanded(
               child: Container(
             color: Colors.red,
@@ -95,6 +59,57 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class BMICard extends StatelessWidget {
+  const BMICard({
+    Key? key,
+    this.child,
+  }) : super(key: key);
+
+  final Widget? child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+          color: Color(0xff272A4E),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        margin: const EdgeInsets.all(15),
+        child: child);
+  }
+}
+
+class GenderIconText extends StatelessWidget {
+  const GenderIconText({
+    Key? key,
+    required this.title,
+    required this.icon,
+  }) : super(key: key);
+
+  final String title;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          size: 80,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          title,
+          style: genderTextStyle,
+        ),
+      ],
     );
   }
 }
