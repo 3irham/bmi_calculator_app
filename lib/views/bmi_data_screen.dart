@@ -21,7 +21,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
         children: [
           Expanded(
             child: Row(
-              children: [
+              children: const [
                 Expanded(
                   child: BMICard(
                       child: GenderIconText(title: 'Male', icon: Icons.male)),
@@ -36,7 +36,41 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
           ),
           Expanded(
               child: Container(
-            color: Colors.red,
+            child: BMICard(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'HEIGHT',
+                    style: labelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '200',
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        'cm',
+                        style: labelTextStyle,
+                      ),
+                    ],
+                  ),
+                  Slider(
+                    value: 100,
+                    min: 100,
+                    max: 200,
+                    onChanged: (value) {},
+                  ),
+                ],
+              ),
+            ),
           )),
           Expanded(
               child: Container(
@@ -107,7 +141,7 @@ class GenderIconText extends StatelessWidget {
         ),
         Text(
           title,
-          style: genderTextStyle,
+          style: labelTextStyle,
         ),
       ],
     );
