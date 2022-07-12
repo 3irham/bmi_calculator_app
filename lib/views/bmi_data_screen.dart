@@ -57,11 +57,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                   children: [
                     Text(
                       ('$height'),
-                      style: const TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                      style: numberTextStyle,
                     ),
                     Text(
                       'cm',
@@ -85,9 +81,113 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
             ),
           )),
           Expanded(
-              child: Container(
-            color: Colors.green,
-          )),
+            child: Row(
+              children: [
+                Expanded(
+                  child: BMICard(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Weight',
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          '80',
+                          style: numberTextStyle,
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RawMaterialButton(
+                              onPressed: () {},
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                              shape: const CircleBorder(),
+                              elevation: 0,
+                              fillColor: const Color(0xff212747),
+                              constraints: const BoxConstraints.tightFor(
+                                width: 56,
+                                height: 56,
+                              ),
+                            ),
+                            RawMaterialButton(
+                              onPressed: () {},
+                              child: const Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                              ),
+                              shape: const CircleBorder(),
+                              elevation: 0,
+                              fillColor: const Color(0xff212747),
+                              constraints: const BoxConstraints.tightFor(
+                                width: 56,
+                                height: 56,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: BMICard(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Age',
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          '24',
+                          style: numberTextStyle,
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RawMaterialButton(
+                              onPressed: () {},
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                              shape: const CircleBorder(),
+                              elevation: 0,
+                              fillColor: const Color(0xff212747),
+                              constraints: const BoxConstraints.tightFor(
+                                width: 56,
+                                height: 56,
+                              ),
+                            ),
+                            RawMaterialButton(
+                              onPressed: () {},
+                              child: const Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                              ),
+                              shape: const CircleBorder(),
+                              elevation: 0,
+                              fillColor: const Color(0xff212747),
+                              constraints: const BoxConstraints.tightFor(
+                                width: 56,
+                                height: 56,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           GestureDetector(
             onTap: () {
               Navigator.push(
@@ -99,8 +199,13 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
             },
             child: Container(
               height: 60,
-              color: Colors.blue,
-              child: const Center(child: Text('BMI Data')),
+              color: Colors.red,
+              child: Center(
+                child: Text(
+                  'BMI Data',
+                  style: labelTextStyle,
+                ),
+              ),
             ),
           ),
         ],
