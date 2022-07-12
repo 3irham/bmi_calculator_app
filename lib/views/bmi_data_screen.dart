@@ -121,7 +121,7 @@ class BMICard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          color: Color(0xff272A4E),
+          color: const Color(0xff272A4E),
           borderRadius: BorderRadius.circular(15),
         ),
         margin: const EdgeInsets.all(15),
@@ -148,7 +148,7 @@ class GenderIconText extends StatelessWidget {
           icon,
           size: 80,
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Text(
