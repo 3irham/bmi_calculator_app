@@ -10,7 +10,9 @@ class BmiDataScreen extends StatefulWidget {
 }
 
 class _BmiDataScreenState extends State<BmiDataScreen> {
-  int height = 100;
+  int height = 125;
+  int weight = 50;
+  int age = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +91,11 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Weight',
+                          'WEIGHT',
                           style: labelTextStyle,
                         ),
                         Text(
-                          '80',
+                          '$weight',
                           style: numberTextStyle,
                         ),
                         const SizedBox(height: 8),
@@ -101,7 +103,11 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RawMaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
                               child: const Icon(
                                 Icons.add,
                                 color: Colors.white,
@@ -115,7 +121,11 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                               ),
                             ),
                             RawMaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
                               child: const Icon(
                                 Icons.remove,
                                 color: Colors.white,
@@ -140,11 +150,11 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Age',
+                          'AGE',
                           style: labelTextStyle,
                         ),
                         Text(
-                          '24',
+                          '$age',
                           style: numberTextStyle,
                         ),
                         const SizedBox(height: 8),
@@ -152,7 +162,11 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RawMaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
                               child: const Icon(
                                 Icons.add,
                                 color: Colors.white,
@@ -166,7 +180,11 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                               ),
                             ),
                             RawMaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
                               child: const Icon(
                                 Icons.remove,
                                 color: Colors.white,
@@ -198,12 +216,16 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
               );
             },
             child: Container(
-              height: 60,
+              height: 80,
               color: Colors.red,
-              child: Center(
+              child: const Center(
                 child: Text(
-                  'BMI Data',
-                  style: labelTextStyle,
+                  'Hitung BMI',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -252,6 +274,7 @@ class GenderIconText extends StatelessWidget {
         Icon(
           icon,
           size: 80,
+          color: Colors.white,
         ),
         const SizedBox(
           height: 20,
