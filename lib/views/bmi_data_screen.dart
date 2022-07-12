@@ -10,11 +10,13 @@ class BmiDataScreen extends StatefulWidget {
 }
 
 class _BmiDataScreenState extends State<BmiDataScreen> {
+  int height = 100;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI Calculator'),
+        title: const Text('BMI Calculator'),
         centerTitle: true,
       ),
       body: Column(
@@ -28,48 +30,58 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                 ),
                 Expanded(
                   child: BMICard(
-                      child:
-                          GenderIconText(title: 'Female', icon: Icons.female)),
+                    child: GenderIconText(
+                      title: 'Female',
+                      icon: Icons.female,
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
           Expanded(
-              child: Container(
-            child: BMICard(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'HEIGHT',
-                    style: labelTextStyle,
+              child: BMICard(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'HEIGHT',
+                  style: labelTextStyle?.copyWith(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        '200',
-                        style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      ('$height'),
+                      style: const TextStyle(
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
-                      Text(
-                        'cm',
-                        style: labelTextStyle,
-                      ),
-                    ],
-                  ),
-                  Slider(
-                    value: 100,
-                    min: 100,
-                    max: 200,
-                    onChanged: (value) {},
-                  ),
-                ],
-              ),
+                    ),
+                    Text(
+                      'cm',
+                      style: labelTextStyle,
+                    ),
+                  ],
+                ),
+                Slider(
+                  value: height.toDouble(),
+                  min: 50,
+                  max: 250,
+                  thumbColor: Colors.red,
+                  activeColor: Colors.white,
+                  onChanged: (value) {
+                    setState(() {
+                      height = value.toInt();
+                    });
+                  },
+                ),
+              ],
             ),
           )),
           Expanded(
@@ -81,7 +93,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BmiResultScreen(),
+                  builder: (context) => const BmiResultScreen(),
                 ),
               );
             },
