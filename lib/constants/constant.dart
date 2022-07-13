@@ -11,3 +11,12 @@ TextStyle numberTextStyle = const TextStyle(
   fontWeight: FontWeight.bold,
   color: Color.fromARGB(255, 255, 255, 255),
 );
+
+String underweightSevere = "Under weight (Severe thinness)";
+String underweightModerate = "Under weight (Moderate thinness)";
+String underweightMild = "Under weight (Mild thinness)";
+String normal = "Normal";
+String overweight = "Over weight";
+String obeseI = "Obese (ClassI)";
+String obeseII = "Obese (Class II)";
+String obeseIII = "Obese (Class III)";

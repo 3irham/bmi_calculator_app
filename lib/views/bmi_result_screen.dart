@@ -3,7 +3,30 @@ import 'package:bmi_calculator_app/views/bmi_data_screen.dart';
 import 'package:flutter/material.dart';
 
 class BmiResultScreen extends StatelessWidget {
-  const BmiResultScreen({super.key});
+  const BmiResultScreen({super.key, required this.bmi});
+  final double bmi;
+
+  determineBmiCategory(double bmiValue) {
+    String category = '';
+    if (bmiValue < 16.0) {
+      category = underweightSevere;
+    } else if (bmiValue < 17) {
+      category = underweightModerate;
+    } else if (bmiValue < 18.5) {
+      category = underweightMild;
+    } else if (bmiValue < 25) {
+      category = normal;
+    } else if (bmiValue < 30) {
+      category = overweight;
+    } else if (bmiValue < 35) {
+      category = obeseI;
+    } else if (bmiValue < 40) {
+      category = obeseII;
+    } else if (bmiValue >= 40) {
+      category = obeseIII;
+    }
+    return category;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +58,24 @@ class BmiResultScreen extends StatelessWidget {
                 ),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
+                    children: [
                       Text(
-                        'Normal',
-                        style: TextStyle(
+                        determineBmiCategory(bmi),
+                        style: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
                       Text(
-                        '18.5',
-                        style: TextStyle(
+                        bmi.toStringAsFixed(1),
+                        style: const TextStyle(
                           fontSize: 95,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
-                      Text(
+                      const Text(
                         'Keep it up',
                         textAlign: TextAlign.center,
                         style: TextStyle(
