@@ -15,6 +15,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
   int height = 125;
   int weight = 50;
   int age = 20;
+  String? gender;
 
   double calculateBmi() {
     double heightInMeter = height / 100;
@@ -34,16 +35,35 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
         children: [
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
-                  child: BMICard(
-                      child: GenderIconText(title: 'Male', icon: Icons.male)),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        gender = 'male';
+                      });
+                    },
+                    child: BMICard(
+                        borderColor:
+                            (gender == 'male') ? Colors.white : primaryColor,
+                        child: const GenderIconText(
+                            title: 'Male', icon: Icons.male)),
+                  ),
                 ),
                 Expanded(
-                  child: BMICard(
-                    child: GenderIconText(
-                      title: 'Female',
-                      icon: Icons.female,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        gender = 'female';
+                      });
+                    },
+                    child: BMICard(
+                      borderColor:
+                          (gender == 'female') ? Colors.white : primaryColor,
+                      child: const GenderIconText(
+                        title: 'Female',
+                        icon: Icons.female,
+                      ),
                     ),
                   ),
                 ),
@@ -117,16 +137,16 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                                   weight++;
                                 });
                               },
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
                               shape: const CircleBorder(),
                               elevation: 0,
                               fillColor: const Color(0xff212747),
                               constraints: const BoxConstraints.tightFor(
                                 width: 56,
                                 height: 56,
+                              ),
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
                               ),
                             ),
                             RawMaterialButton(
@@ -135,16 +155,16 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                                   weight--;
                                 });
                               },
-                              child: const Icon(
-                                Icons.remove,
-                                color: Colors.white,
-                              ),
                               shape: const CircleBorder(),
                               elevation: 0,
                               fillColor: const Color(0xff212747),
                               constraints: const BoxConstraints.tightFor(
                                 width: 56,
                                 height: 56,
+                              ),
+                              child: const Icon(
+                                Icons.remove,
+                                color: Colors.white,
                               ),
                             ),
                           ],
@@ -176,16 +196,16 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                                   age++;
                                 });
                               },
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
                               shape: const CircleBorder(),
                               elevation: 0,
                               fillColor: const Color(0xff212747),
                               constraints: const BoxConstraints.tightFor(
                                 width: 56,
                                 height: 56,
+                              ),
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
                               ),
                             ),
                             RawMaterialButton(
@@ -194,16 +214,16 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                                   age--;
                                 });
                               },
-                              child: const Icon(
-                                Icons.remove,
-                                color: Colors.white,
-                              ),
                               shape: const CircleBorder(),
                               elevation: 0,
                               fillColor: const Color(0xff212747),
                               constraints: const BoxConstraints.tightFor(
                                 width: 56,
                                 height: 56,
+                              ),
+                              child: const Icon(
+                                Icons.remove,
+                                color: Colors.white,
                               ),
                             ),
                           ],
@@ -217,7 +237,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
           ),
           GestureDetector(
             onTap: () {
-              print(calculateBmi());
+              // print(calculateBmi());
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -250,9 +270,11 @@ class BMICard extends StatelessWidget {
   const BMICard({
     Key? key,
     this.child,
+    this.borderColor = primaryColor,
   }) : super(key: key);
 
   final Widget? child;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -260,6 +282,7 @@ class BMICard extends StatelessWidget {
         decoration: BoxDecoration(
           color: const Color(0xff272A4E),
           borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: borderColor!),
         ),
         margin: const EdgeInsets.all(15),
         child: child);

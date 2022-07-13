@@ -6,7 +6,7 @@ class BmiResultScreen extends StatelessWidget {
   const BmiResultScreen({super.key, required this.bmi});
   final double bmi;
 
-  determineBmiCategory(double bmiValue) {
+  String determineBmiCategory(double bmiValue) {
     String category = '';
     if (bmiValue < 16.0) {
       category = underweightSevere;
@@ -28,8 +28,36 @@ class BmiResultScreen extends StatelessWidget {
     return category;
   }
 
+  String getHealRiskDescription(String categoryName) {
+    String desc = '';
+    switch (categoryName) {
+      case underweightSevere:
+      case underweightModerate:
+      case underweightMild:
+        desc = 'Possible nutritional deficiency and osteoporosis';
+        break;
+      case normal:
+        desc = 'Low risk (healthy range)';
+        break;
+      case overweight:
+        desc =
+            'Moderate risk of developing heart disease, high blood pressure, and diabetes';
+        break;
+      case obeseI:
+      case obeseII:
+      case obeseIII:
+        desc =
+            'High risk of developing heart disease, high blood pressure, and diabetes';
+        break;
+      default:
+    }
+    return desc;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final String bmiCategory = determineBmiCategory(bmi);
+    final String bmiDescription = getHealRiskDescription(bmiCategory);
     return Scaffold(
       appBar: AppBar(
         title: const Text('BMI Result'),
@@ -51,39 +79,44 @@ class BmiResultScreen extends StatelessWidget {
           ),
           Expanded(
             flex: 5,
-            child: BMICard(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 80,
+            child: SizedBox(
+              width: double.infinity,
+              child: BMICard(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          bmiCategory,
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          style: const TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          bmi.toStringAsFixed(1),
+                          style: const TextStyle(
+                            fontSize: 95,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          bmiDescription,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ]),
                 ),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        determineBmiCategory(bmi),
-                        style: const TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        bmi.toStringAsFixed(1),
-                        style: const TextStyle(
-                          fontSize: 95,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const Text(
-                        'Keep it up',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ]),
               ),
             ),
           ),
