@@ -85,45 +85,56 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
               ),
             ],
           ),
-          BMICard(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'HEIGHT',
-                  style: labelTextStyle?.copyWith(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+          Column(
+            children: [
+              Text(
+                'HEIGHT',
+                style: labelTextStyle?.copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 15,
+                ),
+                child: Row(
                   children: [
-                    Text(
-                      ('$height'),
-                      style: numberTextStyle,
+                    Expanded(
+                      child: BMICard(
+                        child: Slider(
+                          value: height.toDouble(),
+                          min: 50,
+                          max: 250,
+                          thumbColor: Colors.red,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              height = value.toInt();
+                            });
+                          },
+                        ),
+                      ),
                     ),
-                    Text(
-                      'cm',
-                      style: labelTextStyle,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          ('$height'),
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          ' cm',
+                          style: labelTextStyle,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                Slider(
-                  value: height.toDouble(),
-                  min: 50,
-                  max: 250,
-                  thumbColor: Colors.red,
-                  activeColor: Colors.white,
-                  onChanged: (value) {
-                    setState(() {
-                      height = value.toInt();
-                    });
-                  },
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           Row(
             children: [
