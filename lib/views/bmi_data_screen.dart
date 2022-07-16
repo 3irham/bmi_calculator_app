@@ -17,7 +17,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
   int height = 125;
   int weight = 50;
   int age = 20;
-  String? gender;
+  String? gender = 'male';
 
   // double calculateBmi() {
   //   double heightInMeter = height / 100;
@@ -48,200 +48,243 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
         title: const Text('BMI Calculator'),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      gender = 'male';
-                    });
-                  },
-                  child: BMICard(
-                      borderColor:
-                          (gender == 'male') ? Colors.white : primaryColor,
-                      child: const GenderIconText(
-                          title: 'Male', icon: Icons.male)),
-                ),
-              ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      gender = 'female';
-                    });
-                  },
-                  child: BMICard(
-                    borderColor:
-                        (gender == 'female') ? Colors.white : primaryColor,
-                    child: const GenderIconText(
-                      title: 'Female',
-                      icon: Icons.female,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Text(
-                'HEIGHT',
-                style: labelTextStyle?.copyWith(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 15,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: BMICard(
-                        child: Slider(
-                          value: height.toDouble(),
-                          min: 50,
-                          max: 250,
-                          thumbColor: Colors.red,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              height = value.toInt();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          ('$height'),
-                          style: labelTextStyle,
-                        ),
-                        Text(
-                          ' cm',
-                          style: labelTextStyle,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    Text(
-                      'WEIGHT',
-                      style: labelTextStyle,
-                    ),
-                    BMICard(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            child: CupertinoPicker(
-                              itemExtent: 25,
-                              scrollController: FixedExtentScrollController(
-                                initialItem: 40,
-                              ),
-                              magnification: 2,
-                              useMagnifier: true,
-                              onSelectedItemChanged: (val) {
-                                // print(val);
-                                weight = val;
-                              },
-                              children: generateList(0, 250),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    Text(
-                      'AGE',
-                      style: labelTextStyle,
-                    ),
-                    BMICard(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            child: CupertinoPicker(
-                              itemExtent: 25,
-                              scrollController: FixedExtentScrollController(
-                                initialItem: 20,
-                              ),
-                              magnification: 2,
-                              useMagnifier: true,
-                              onSelectedItemChanged: (val) {
-                                // print(val);
-                                weight = val;
-                              },
-                              children: generateList(0, 90),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          GestureDetector(
-            onTap: () {
-              // print(calculateBmi());
-              final bmiCalculator =
-                  BmiCalculator(height: height, weight: weight);
-              bmiCalculator.calculateBmi();
+      bottomNavigationBar: GestureDetector(
+        onTap: () {
+          // print(calculateBmi());
+          final bmiCalculator = BmiCalculator(height: height, weight: weight);
+          bmiCalculator.calculateBmi();
 
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return BmiResultScreen(
-                    bmi: bmiCalculator.bmi!,
-                  );
-                }),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return BmiResultScreen(
+                bmi: bmiCalculator.bmi!,
               );
-            },
-            child: Container(
-              height: 60,
-              margin: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Center(
-                child: Text(
-                  'Hitung BMI',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            }),
+          );
+        },
+        child: Container(
+          height: 60,
+          margin: const EdgeInsets.all(15),
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: const Center(
+            child: Text(
+              'Hitung BMI',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-        ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        gender = 'male';
+                      });
+                    },
+                    child: BMICard(
+                      borderColor:
+                          (gender == 'male') ? Colors.white : primaryColor,
+                      child: Stack(
+                        children: [
+                          const Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 15),
+                              child: GenderIconText(
+                                  title: 'Male', icon: Icons.male),
+                            ),
+                          ),
+                          Positioned(
+                            right: 10,
+                            top: 10,
+                            child: Icon(
+                              Icons.check_circle,
+                              color: (gender == 'male')
+                                  ? Colors.white
+                                  : primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        gender = 'female';
+                      });
+                    },
+                    child: BMICard(
+                      borderColor:
+                          (gender == 'female') ? Colors.white : primaryColor,
+                      child: Stack(
+                        children: [
+                          const Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 15),
+                              child: GenderIconText(
+                                title: 'Female',
+                                icon: Icons.female,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            right: 10,
+                            top: 10,
+                            child: Icon(
+                              Icons.check_circle,
+                              color: (gender == 'female')
+                                  ? Colors.white
+                                  : primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Column(
+              children: [
+                Text(
+                  'HEIGHT',
+                  style: labelTextStyle?.copyWith(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 15,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: BMICard(
+                          child: Slider(
+                            value: height.toDouble(),
+                            min: 50,
+                            max: 250,
+                            thumbColor: Colors.red,
+                            activeColor: Colors.white,
+                            onChanged: (value) {
+                              setState(() {
+                                height = value.toInt();
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            ('$height'),
+                            style: labelTextStyle,
+                          ),
+                          Text(
+                            ' cm',
+                            style: labelTextStyle,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        'WEIGHT',
+                        style: labelTextStyle,
+                      ),
+                      BMICard(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              child: CupertinoPicker(
+                                itemExtent: 25,
+                                scrollController: FixedExtentScrollController(
+                                  initialItem: 40,
+                                ),
+                                magnification: 2,
+                                useMagnifier: true,
+                                onSelectedItemChanged: (val) {
+                                  // print(val);
+                                  weight = val;
+                                },
+                                children: generateList(0, 250),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        'AGE',
+                        style: labelTextStyle,
+                      ),
+                      BMICard(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              child: CupertinoPicker(
+                                itemExtent: 25,
+                                scrollController: FixedExtentScrollController(
+                                  initialItem: 20,
+                                ),
+                                magnification: 2,
+                                useMagnifier: true,
+                                onSelectedItemChanged: (val) {
+                                  // print(val);
+                                  weight = val;
+                                },
+                                children: generateList(0, 90),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
